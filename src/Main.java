@@ -1,21 +1,42 @@
+import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
+import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Filme;
+import br.com.alura.screenmatch.modelos.Serie;
 
 import java.util.Scanner;
 
 public class Main{
     public static void main() {
         Scanner scanner = new Scanner(System.in);
-        Filme meuFilme = new Filme();
+        Serie serie = new Serie();
+        serie.setNome("Lost");
+        serie.setAnoDeLancamento(1990);
+        serie.avalia(9);
+        serie.setEspisodioPorTemporada(10);
+        serie.setTemporadas(9);
+        serie.setMinutosEspisodio(50);
+        System.out.println("Duração em minutos de lost " + serie.getDuracaoEmMinutos());
+        serie.exibiFichaTecnicaSerie();
 
-        meuFilme.setNome("O poderoso chefão");
-        meuFilme.setAnoDeLancamento(1970);
-        meuFilme.avalia(8);
-        meuFilme.avalia(6.7);
-        meuFilme.avalia(9);
+        Filme filme = new Filme();
 
-        meuFilme.exibiFichaTecnica();
+        filme.setDiretor("Blazius");
+        filme.setDuracaoEmMinutos(50);
+        filme.setNome("Poderoso chefão");
+        filme.avalia(6);
 
-        int totalAvaliacoesFilme = meuFilme.getTotalDeAvaliacao();
-        System.out.println(totalAvaliacoesFilme);
+        Filme outroFilme = new Filme();
+        outroFilme.setDuracaoEmMinutos(180);
+        CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
+        calculadora.inclui(filme);
+        calculadora.inclui(outroFilme);
+        System.out.println(calculadora.getTempoTotal());
+
+        calculadora.inclui(serie);
+        System.out.println(calculadora.getTempoTotal());
+
+        FiltroRecomendacao filtro = new FiltroRecomendacao();
+        filtro.filtra(serie);
+        filtro.filtra(filme);
     }
 }
